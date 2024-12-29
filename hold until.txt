@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: #61dafb;
+            text-align: center;
+        }
+        .countdown {
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Countdown to 2025</h1>
+        <div class="countdown" id="countdown">Loading...</div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const targetDate = new Date('January 1, 2025 00:00:00');
+            const timeDifference = targetDate - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('countdown').textContent = "Happy New Year 2025!";
+                clearInterval(interval);
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
